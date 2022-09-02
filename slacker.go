@@ -41,11 +41,16 @@ func defaultCleanEventInput(msg string) string {
 func NewClient(botToken, appToken string, options ...ClientOption) *Slacker {
 	defaults := newClientDefaults(options...)
 
-	api := slack.New(
-		botToken,
+	opts := []slack.Option{
 		slack.OptionDebug(defaults.Debug),
 		slack.OptionAppLevelToken(appToken),
-	)
+	}
+
+	if defaults.APIURL != "" {
+		opts = append(opts, slack.OptionAPIURL(defaults.APIURL))
+	}
+
+	api := slack.New(botToken, opts...)
 
 	smc := socketmode.New(
 		api,

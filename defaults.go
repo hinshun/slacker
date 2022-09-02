@@ -20,10 +20,18 @@ func WithBotInteractionMode(mode BotInteractionMode) ClientOption {
 	}
 }
 
+// WithAPIURL set the url for the client. only useful for testing.
+func WithAPIURL(u string) ClientOption {
+	return func(defaults *ClientDefaults) {
+		defaults.APIURL = u
+	}
+}
+
 // ClientDefaults configuration
 type ClientDefaults struct {
 	Debug   bool
 	BotMode BotInteractionMode
+	APIURL string
 }
 
 func newClientDefaults(options ...ClientOption) *ClientDefaults {
