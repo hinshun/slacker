@@ -180,7 +180,7 @@ func (s *Slacker) CommandEvents() <-chan *CommandEvent {
 
 // Listen receives events from Slack and each is handled as needed
 func (s *Slacker) Listen(ctx context.Context) error {
-	s.prependHelpHandle()
+	// s.prependHelpHandle()
 
 	go func() {
 		for {
